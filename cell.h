@@ -2,6 +2,9 @@
 // Created by studio25 on 30.03.2021.
 //
 
+// cell holds value of a square,
+//
+
 #ifndef LIZAPPER_CELL_H
 #define LIZAPPER_CELL_H
 
@@ -28,7 +31,6 @@ public:
 
     char bombs_nearby() const { return (char) (value & 30); }
 
-
     explicit operator char();
 
 protected:
@@ -38,13 +40,14 @@ protected:
     // it's an idea, I thing it's cool, but it's early
 /*
 one cell can be in few stages
- 1. -safe
-    -bomb
+ 1.  -safe / bomb
 
- 2.  -known
- 3.     - can have value from 1 - 8
+ 2.  -known / unknown
 
- 4.  -flagged
+ 3.  -how many bombs are nearby - can have value from 1 - 8
+        therefore it needs 4 bytes of space
+
+ 4.  -flagged / un_flagged
 
 
  lets say

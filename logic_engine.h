@@ -35,9 +35,9 @@ public:
     void show();
 
 protected:
-    //##   <- this board is 3x2
-    //##      x = 3 y = 2
-    //##      that's my notation deal with it
+    // ##   <- this board is 3x2
+    // ##      x_ = 3 y_ = 2
+    // ##      that's my notation deal with it
 
     size_t x_;
     size_t y_;
