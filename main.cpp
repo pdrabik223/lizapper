@@ -13,21 +13,20 @@
 int main() {
     srand(time(NULL));
     printf("hello world\n");
-    cell pierwsza(true);
+    cell pierwsza(false);
     pierwsza.set_known(true);
     pierwsza.set_nearby(4);
-    printf("%c \n\n\n", pierwsza.bombs_nearby());
 
-    logic_engine cos(4, 4);
-    cos.show();
 
-    cos.fill_with_bombs(25);
-    cos.fill_with_numbers();
-    for(int i=0;i<cos.size();i++)
-        cos[i].set_known(true);
+             logic_engine cos(6, 6);
 
-    cos.show();
 
-    system("pause");
+             cos.fill_with_bombs(50);
+             cos.fill_with_numbers();
+             for(int i=0;i<cos.size();i++)
+                 cos[i].set_known(true);
+
+             cos.show();
+             system("pause");
     return 0;
 }

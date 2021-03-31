@@ -10,7 +10,7 @@
 void logic_engine::fill_with_bombs(unsigned int fill_in_percentage) {
 
     for (int i = 0; i < size(); i++)
-        if (rand() % 100 > fill_in_percentage)
+        if (rand() % 100 < fill_in_percentage)
             board[i].set_bomb(true);
 
 }
@@ -52,7 +52,6 @@ char logic_engine::count_nearby(unsigned int position) {
     if (px < x_ - 1) if (board[position + y_].is_bomb()) ++counter;
     if (px < x_ - 1 && py < y_ - 1) if (board[position + 1 + y_].is_bomb()) ++counter;
 
-    std::clog << (int) counter << "\n";
 
     return counter;
 }

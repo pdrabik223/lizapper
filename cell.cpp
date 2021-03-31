@@ -22,8 +22,8 @@ cell::operator char() {
         return '#';
     } else {
         if (is_bomb()) return '*';
-        if (bombs_nearby() == 0) return '.';
-        return (bombs_nearby() + 48);
+        if (bombs_nearby() == '0') return '.';
+        return bombs_nearby() ;
     }
 }
 
@@ -59,7 +59,6 @@ void cell::set_known(bool discover) {
 
 void cell::set_nearby(char how_many) {
     if(how_many>8) throw "to many bombs";
-    how_many<<1;
-    value+=how_many;
+    value+=how_many<<1;
 
 }
