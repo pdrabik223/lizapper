@@ -13,7 +13,7 @@ class cell {
 public:
     cell();
 
-    cell(bool bomb);
+    explicit cell(bool bomb);
 
     bool is_flag_on() const { return value & 64; }
 
@@ -29,7 +29,9 @@ public:
 
     void set_known(bool discover);
 
-    char bombs_nearby() const { return (char) (value & 30); }
+    char bombs_nearby() const { return (char) ((value & 30)>>1); }
+
+    void set_nearby(char how_many);
 
     explicit operator char();
 

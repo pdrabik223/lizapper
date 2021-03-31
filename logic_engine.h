@@ -30,11 +30,17 @@ public:
 
     cell &operator[](size_t position) { return board[position]; }
 
-    void fill_with_bombs(unsigned fill_in_percentage);
+
 
     void show();
 
+    void iterate(size_t position_to_start);
+    void fill_with_bombs(unsigned fill_in_percentage);
+    void fill_with_numbers();
+    char count_nearby(unsigned int position);
+
 protected:
+
     // ##   <- this board is 3x2
     // ##      x_ = 3 y_ = 2
     // ##      that's my notation deal with it
@@ -42,6 +48,8 @@ protected:
     size_t x_;
     size_t y_;
     cell *board;
+
+
 };
 
 
