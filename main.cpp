@@ -17,19 +17,22 @@ int main() {
 
     logic_engine cos(6, 6);
 
-
     cos.fill_with_bombs(5);
     cos.fill_with_numbers();
+
     for (int i = 0; i < cos.size(); i++)
         cos[i].set_known(true);
 
 
     cos.show();
+    std::cout<<std::endl;
+
     for (int i = 0; i < cos.size(); i++)
         cos[i].set_known(false);
 
     cos.iterate(6*6/2);
     cos.show();
+
     system("pause");
     return 0;
 }
