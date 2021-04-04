@@ -29,7 +29,7 @@ public:
 
     void set_known(bool discover);
 
-    char bombs_nearby() const { return (char)(((value & 30)>>1)+48); }
+    char bombs_nearby() const { return (char)(((value & 30)>>1)); }
 
     void set_nearby(char how_many);
 

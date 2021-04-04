@@ -22,8 +22,8 @@ cell::operator char() {
         return '#';
     } else {
         if (is_bomb()) return '*';
-        if (bombs_nearby() == '0') return '.';
-        return bombs_nearby() ;
+        if (bombs_nearby() == 0) return '.';
+        return bombs_nearby()+48 ;
     }
 }
 
