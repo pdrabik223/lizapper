@@ -13,28 +13,36 @@
 int main() {
     srand(time(NULL));
     printf("hello world\n");
+    windows_console game;
 
+    unsigned difficulty_level = 50;
+    size_t x = 10;
+    size_t y = 10;
 
-    logic_engine cos(6, 6);
+    // game.start(difficulty_level,x,y);
 
-    cos.fill_with_bombs(5);
-    cos.fill_with_numbers();
+    logic_engine brain(x, y);
 
-    for (int i = 0; i < cos.size(); i++)
-        cos[i].set_known();
-    for (int i = 0; i < cos.size(); i++)
-        cos[i].set_known();
+    brain.fill_with_bombs(difficulty_level);
 
+    brain.fill_with_numbers();
 
-    cos.show();
-    std::cout<<std::endl;
+    game.set_engine(brain);
 
-    for (int i = 0; i < cos.size(); i++)
-        cos[i].set_unknown();
+    bool is_won;
+    while (2 > 1) { // main loop
+        system("cls");
 
-    cos.iterate(6*6/2+3);
-    cos.show();
+        game.show_frame();
 
-    system("pause");
+        game.user_interaction();
+
+        is_won = game.gen_frame();
+
+        if (is_won) break;
+
+    }
+    game.end(false);
+//    system("pause");
     return 0;
 }

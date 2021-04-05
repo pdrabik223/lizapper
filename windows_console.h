@@ -10,16 +10,26 @@
 class windows_console : protected game_engine_traits {
 
 public:
+    windows_console() : game_engine_traits() {};
+
     windows_console(logic_engine &game) : game_engine_traits(game) {};
 
-    void show_frame();
+    void show_frame() override;
 
-    void show_time();
+    void show_time() {};
 
-    bool gen_frame();
+    bool gen_frame() override;
 
-    char user_interaction();
+    void user_interaction() override;
 
+    void start(unsigned &difficulty_level, size_t &x, size_t &y);
+
+    void end(bool result);
+
+    void set_engine(logic_engine &game) {
+        delete engine_instation;
+        engine_instation = &game;
+    }
 
 };
 

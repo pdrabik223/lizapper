@@ -62,6 +62,8 @@ public:
         delete[] board;
     }
 
+
+
 protected:
 
     // ##   <- this board is 3x2
