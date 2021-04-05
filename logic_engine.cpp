@@ -24,11 +24,13 @@ void logic_engine::show() {
 }
 
 void logic_engine::iterate(size_t position_to_start) {
-    unsigned px = position_to_start / y_;
-    unsigned py = position_to_start % y_;
+    size_t px = position_to_start / y_;
+    size_t py = position_to_start % y_;
 
-    if (board[px][py].is_bomb()) return; // requ ends here
-    board[px][py].set_known(true);
+    // at this point chosen board should never be bomb,
+
+    if (board[px][py].is_bomb() || board[px][py].is_known()) return; // requ ends here
+    else board[px][py].set_known();
 
     if (board[px][py].bombs_nearby() != 0) return;
 
@@ -37,7 +39,7 @@ void logic_engine::iterate(size_t position_to_start) {
 
     if (px > 0 && py > 0) iterate(position_to_start - 1 - y_);
 
-    if (px > 0) iterate(position_to_start - y_);
+    if (px > 0)  iterate(position_to_start - y_);
 
     if (px > 0 && py < y_ - 1) iterate(position_to_start + 1 - y_);
 

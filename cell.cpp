@@ -12,8 +12,8 @@ cell::cell(bool bomb) {
 }
 
 void cell::switch_flag() {
-        if (is_flag_on()) value -= 64;
-        else value += 64;
+    if (is_flag_on()) value -= 64;
+    else value += 64;
 }
 
 cell::operator char() {
@@ -23,7 +23,7 @@ cell::operator char() {
     } else {
         if (is_bomb()) return '*';
         if (bombs_nearby() == 0) return '.';
-        return bombs_nearby()+48 ;
+        return bombs_nearby() + 48;
     }
 }
 
@@ -47,23 +47,16 @@ void cell::set_bomb(bool bomb) {
     }
 }
 
-void cell::set_known(bool discover) {
-    if (discover) {
+void cell::set_known() {
+    if (!is_known()) value += 32;
+}
 
-        int yas = 0;
-        char idk = '0';
-        idk = value & 32;
-        if (!idk)
-            value += 32;
-
-    } else {
-        if (is_known())
-            value -= 32;
-    }
+void cell::set_unknown() {
+    if (is_known()) value -= 32;
 }
 
 void cell::set_nearby(char how_many) {
-    if(how_many>8) throw "to many bombs";
-    value+=how_many<<1;
-
+    if (how_many > 8) throw "to many bombs";
+    value += how_many << 1;
 }
+

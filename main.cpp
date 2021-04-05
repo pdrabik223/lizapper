@@ -21,16 +21,18 @@ int main() {
     cos.fill_with_numbers();
 
     for (int i = 0; i < cos.size(); i++)
-        cos[i].set_known(true);
+        cos[i].set_known();
+    for (int i = 0; i < cos.size(); i++)
+        cos[i].set_known();
 
 
     cos.show();
     std::cout<<std::endl;
 
     for (int i = 0; i < cos.size(); i++)
-        cos[i].set_known(false);
+        cos[i].set_unknown();
 
-    cos.iterate(6*6/2+1);
+    cos.iterate(6*6/2+3);
     cos.show();
 
     system("pause");

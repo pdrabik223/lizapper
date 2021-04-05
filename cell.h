@@ -27,7 +27,8 @@ public:
 
     bool is_known() const { return value & 32; }
 
-    void set_known(bool discover);
+    void set_known();
+    void set_unknown();
 
     char bombs_nearby() const { return (char)(((value & 30)>>1)); }
 
