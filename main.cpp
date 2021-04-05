@@ -6,6 +6,7 @@
 #include <cstdio>
 #include <iostream>
 #include <ctime>
+#include <thread>
 #include "logic_engine.h"
 #include "game_engine_traits.h"
 #include "windows_console.h"
@@ -26,13 +27,15 @@ int main() {
     brain.fill_with_bombs(difficulty_level);
 
     brain.fill_with_numbers();
+    auto helper(brain);
+    for(int i=0;i<helper.size();i++) helper[i].set_known();
 
     game.set_engine(brain);
 
     bool is_won;
     while (2 > 1) { // main loop
         system("cls");
-
+        helper.show();
         game.show_frame();
 
         game.user_interaction();

@@ -28,6 +28,36 @@ public:
         }
     };
 
+    logic_engine(logic_engine& other){
+     x_ = other.x_;
+     y_ = other.y_;
+
+        board = new cell *[x_];
+
+        for (int i = 0; i < x_; i++) {
+            board[i] = new cell[y_];
+            for (int j = 0; j < y_; j++) {
+                board[i][j] = other.board[i][j];
+            }
+        }
+
+    }
+    logic_engine& operator=(logic_engine& other){
+        if(this == &other) return *this;
+        x_ = other.x_;
+        y_ = other.y_;
+
+        board = new cell *[x_];
+
+        for (int i = 0; i < x_; i++) {
+            board[i] = new cell[y_];
+            for (int j = 0; j < y_; j++) {
+                board[i][j] = other.board[i][j];
+            }
+        }
+    return *this;
+    }
+
     size_t size() const { return x_ * y_; }
 
     size_t get_x() const { return x_; }
