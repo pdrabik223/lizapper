@@ -17,11 +17,13 @@ public:
     logic_engine() = delete;
 
     logic_engine(size_t x, size_t y) : x_(x), y_(y) {
+
         board = new cell *[x];
-        for(int i=0;i<x;i++) {
+
+        for (int i = 0; i < x; i++) {
             board[i] = new cell[y];
-            for (int j = 0; j<y; j++) {
-                board[i][j] = cell();
+            for (int j = 0; j < y; j++) {
+                board[i][j] = cell(false);
             }
         }
     };
@@ -51,7 +53,13 @@ public:
     void fill_with_numbers();
 
     char count_nearby(unsigned int position);
+~logic_engine(){
+    for (int i = 0; i < x_; i++) {
+        delete[] board[i];
 
+    }
+    delete[] board;
+}
 protected:
 
     // ##   <- this board is 3x2

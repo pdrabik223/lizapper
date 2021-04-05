@@ -30,7 +30,7 @@ int main() {
     for (int i = 0; i < cos.size(); i++)
         cos[i].set_known(false);
 
-    cos.iterate(6*6/2);
+    cos.iterate(6*6/2+1);
     cos.show();
 
     system("pause");
