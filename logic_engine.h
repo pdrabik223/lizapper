@@ -28,22 +28,7 @@ public:
         }
     };
 
-    logic_engine(logic_engine& other){
-     x_ = other.x_;
-     y_ = other.y_;
-
-        board = new cell *[x_];
-
-        for (int i = 0; i < x_; i++) {
-            board[i] = new cell[y_];
-            for (int j = 0; j < y_; j++) {
-                board[i][j] = other.board[i][j];
-            }
-        }
-
-    }
-    logic_engine& operator=(logic_engine& other){
-        if(this == &other) return *this;
+    logic_engine(logic_engine &other) {
         x_ = other.x_;
         y_ = other.y_;
 
@@ -55,8 +40,33 @@ public:
                 board[i][j] = other.board[i][j];
             }
         }
-    return *this;
+
     }
+
+    logic_engine &operator=(logic_engine &other) {
+        if (this == &other) return *this;
+        x_ = other.x_;
+        y_ = other.y_;
+
+        board = new cell *[x_];
+
+        for (int i = 0; i < x_; i++) {
+            board[i] = new cell[y_];
+            for (int j = 0; j < y_; j++) {
+                board[i][j] = other.board[i][j];
+            }
+        }
+        return *this;
+    }
+
+    bool is_the_game_won() {
+        for (int i = 0; i < x_; i++) {
+            for (int j = 0; j < y_; j++)
+                if (!board[i][j].is_bomb() && !board[i][j].is_known()) return false;
+        }
+        return true;
+    }
+
 
     size_t size() const { return x_ * y_; }
 
@@ -91,7 +101,6 @@ public:
         }
         delete[] board;
     }
-
 
 
 protected:

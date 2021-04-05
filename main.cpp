@@ -1,7 +1,12 @@
 //
 // Created by studio25 on 30.03.2021.
 //
-
+// todo make it winable
+// todo make it count time
+// todo documentation
+// todo some cord class
+// and push it as a new repo or smth
+// todo like emm  stl_shiet
 
 #include <cstdio>
 #include <iostream>
@@ -16,7 +21,7 @@ int main() {
     printf("hello world\n");
     windows_console game;
 
-    unsigned difficulty_level = 50;
+    unsigned difficulty_level = 7;
     size_t x = 10;
     size_t y = 10;
 
@@ -32,7 +37,7 @@ int main() {
 
     game.set_engine(brain);
 
-    bool is_won;
+    bool game_status;
     while (2 > 1) { // main loop
         system("cls");
         helper.show();
@@ -40,12 +45,13 @@ int main() {
 
         game.user_interaction();
 
-        is_won = game.gen_frame();
+        game_status = game.gen_frame();
 
-        if (is_won) break;
+        if (game_status != 0) break;
 
     }
-    game.end(false);
-//    system("pause");
+    if(game_status == 1) game.end(false);
+    else game.end(true);
+    //    system("pause");
     return 0;
 }

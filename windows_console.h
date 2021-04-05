@@ -18,7 +18,7 @@ public:
 
     void show_time() {};
 
-    bool gen_frame() override;
+    char gen_frame() override;
 
     void user_interaction() override;
 

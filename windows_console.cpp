@@ -34,12 +34,12 @@ void windows_console::user_interaction() {
                 return;
 
             case 'w':
-                if (cursor_position / engine_instation->get_y() >0)
+                if (cursor_position / engine_instation->get_y() > 0)
                     cursor_position -= engine_instation->get_y();
                 player_action = do_nothing;
                 return;
             case 's':
-                if (cursor_position / engine_instation->get_y() <  engine_instation->get_x()-1)
+                if (cursor_position / engine_instation->get_y() < engine_instation->get_x() - 1)
                     cursor_position += engine_instation->get_y();
                 player_action = do_nothing;
                 return;
@@ -64,16 +64,16 @@ void windows_console::user_interaction() {
 
 }
 
-bool windows_console::gen_frame() {
-    if (player_action == do_nothing) return false;
-    if (player_action == flag) {
-
-        engine_instation->operator[](cursor_position).switch_flag();
-    } else if (engine_instation->operator[](cursor_position).is_bomb()) return true;
-    engine_instation->iterate(cursor_position);
-
-    return false;
-
+char windows_console::gen_frame() {
+    if (player_action == do_nothing) return 0; // nothing happens game is still on
+    if (player_action == flag) engine_instation->operator[](cursor_position).switch_flag();
+    else if (player_action == pop) {
+        if (engine_instation->operator[](cursor_position).is_flag_on()) return 0;
+        else if (engine_instation->operator[](cursor_position).is_bomb()) return 1; // ha u lose
+        else engine_instation->iterate(cursor_position);
+    }
+    if(engine_instation->is_the_game_won()) return 2; // nice u won
+    return 0;
 }
 
 void windows_console::start(unsigned &difficulty_level, size_t &x, size_t &y) {
@@ -93,6 +93,11 @@ void windows_console::start(unsigned &difficulty_level, size_t &x, size_t &y) {
 }
 
 void windows_console::end(bool result) {
+    for (int i = 0; i < engine_instation->size(); i++)
+        engine_instation->operator[](i).set_known();
+    system("cls");
+    engine_instation->show();
+
     if (result) {
         printf("job well done! now go fuck your self\n ");
         system("pause");
