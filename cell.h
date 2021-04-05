@@ -44,7 +44,7 @@ protected:
 one cell can be in few stages
  1.  -safe / bomb
 
- 2.  -known / unknown
+ 2.  -unknown / known
 
  3.  -how many bombs are nearby - can have value from 1 - 8
         therefore it needs 4 bytes of space

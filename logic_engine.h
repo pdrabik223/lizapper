@@ -38,7 +38,7 @@ public:
 
     void set_y(size_t y) { y_ = y; }
 
-    cell &get(size_t &x, size_t &y) { return board[x][y]; }
+    cell &get(size_t x, size_t y) { return board[x][y]; }
 
     cell &operator[](size_t pos) {
         return board[pos / y_][pos % y_];
@@ -53,13 +53,15 @@ public:
     void fill_with_numbers();
 
     char count_nearby(unsigned int position);
-~logic_engine(){
-    for (int i = 0; i < x_; i++) {
-        delete[] board[i];
 
+    ~logic_engine() {
+        for (int i = 0; i < x_; i++) {
+            delete[] board[i];
+
+        }
+        delete[] board;
     }
-    delete[] board;
-}
+
 protected:
 
     // ##   <- this board is 3x2

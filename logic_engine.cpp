@@ -28,65 +28,29 @@ void logic_engine::iterate(size_t position_to_start) {
     unsigned py = position_to_start % y_;
 
     if (board[px][py].is_bomb()) return; // requ ends here
-    else board[px][py].set_known(true);
-    //if(board[px][py].bombs_nearby() != 0) return;
-    // to prevent addressing wrong cell 
-    if (px > 0 && py > 0) {
+    board[px][py].set_known(true);
 
-        if (!board[px - 1][py - 1].is_bomb()) {
-            board[px - 1][py - 1].set_known(true);
-       //     if (board[px - 1][py - 1].bombs_nearby() == 0) iterate(position_to_start - 1 - y_);
-        }
-    }
+    if (board[px][py].bombs_nearby() != 0) return;
 
+    // to prevent SIEGSEGV
+    // but it doesn't work
 
-    if (px > 0) {
-        if (!board[px - 1][py].is_bomb()) {
-            board[px - 1][py].set_known(true);
-      //      if (board[px - 1][py].bombs_nearby() == 0) iterate(position_to_start - y_);
-        }
-    }
+    if (px > 0 && py > 0) iterate(position_to_start - 1 - y_);
 
-    if (px > 0 && py < y_ - 1) {
-        if (!board[px - 1][py + 1].is_bomb()) {
-            board[px - 1][py + 1].set_known(true);
-          //  if (board[px - 1][py + 1].bombs_nearby() == 0) iterate(position_to_start + 1 - y_);
-        }
-    }
+    if (px > 0) iterate(position_to_start - y_);
 
+    if (px > 0 && py < y_ - 1) iterate(position_to_start + 1 - y_);
 
-    if (py > 0) {
-        if (!board[px][py - 1].is_bomb()) {
-            board[px][py - 1].set_known(true);
-       //     if (board[px][py - 1].bombs_nearby() == 0) iterate(position_to_start - 1);
-        }
-    }
+    if (py > 0) iterate(position_to_start - 1);
 
-    if (py < y_ - 1) {
-        if (!board[px][py + 1].is_bomb()) {
-            board[px][py + 1].set_known(true);
-      //      if (board[px][py + 1].bombs_nearby() == 0) iterate(position_to_start + 1);
-        }
-    }
+    if (py < y_ - 1) iterate(position_to_start + 1);
 
-    if (px < x_ - 1 && py > 0) {
-        if (!board[px + 1][py - 1].is_bomb()) {
-            board[px + 1][py - 1].set_known(true);
-    //        if (board[px + 1][py - 1].bombs_nearby() == 0) iterate(position_to_start - 1 + y_);
-        }
-    }
-    if (px < x_ - 1) {
-        if (!board[px + 1][py].is_bomb()) {
-            board[px + 1][py].set_known(true);
-         //   if (board[px + 1][py].bombs_nearby() == 0) iterate(position_to_start + y_);
-        }
-    }
-    if (px < x_ - 1 && py < y_ - 1) {
-        if (!board[px + 1][py + 1].is_bomb()) {
-            board[px + 1][py + 1].set_known(true);
-       //*     if (board[px + 1][py + 1].bombs_nearby() == 0) iterate(position_to_start + 1 + y_);
-        }
-    }
+    if (px < x_ - 1 && py > 0) iterate(position_to_start - 1 + y_);
+
+    if (px < x_ - 1) iterate(position_to_start + y_);
+
+    if (px < x_ - 1 && py < y_ - 1) iterate(position_to_start + 1 + y_);
+
 
 }
 
@@ -104,16 +68,16 @@ char logic_engine::count_nearby(unsigned int position) {
     if (board[px][py].is_bomb()) return 0;
 
     // to prevent addressing wrong
-    if (px > 0 && py > 0) if (board[px-1][py-1].is_bomb()) ++counter;
-    if (px > 0) if (board[px-1][py].is_bomb()) ++counter;
-    if (px > 0 && py < y_ - 1) if (board[px-1][py+1].is_bomb()) ++counter;
+    if (px > 0 && py > 0) if (board[px - 1][py - 1].is_bomb()) ++counter;
+    if (px > 0) if (board[px - 1][py].is_bomb()) ++counter;
+    if (px > 0 && py < y_ - 1) if (board[px - 1][py + 1].is_bomb()) ++counter;
 
-    if (py > 0) if (board[px][py-1].is_bomb()) ++counter;
-    if (py < y_ - 1) if (board[px][py+1].is_bomb()) ++counter;
+    if (py > 0) if (board[px][py - 1].is_bomb()) ++counter;
+    if (py < y_ - 1) if (board[px][py + 1].is_bomb()) ++counter;
 
-    if (px < x_ - 1 && py > 0) if (board[px+1][py-1].is_bomb()) ++counter;
-    if (px < x_ - 1) if (board[px+1][py].is_bomb()) ++counter;
-    if (px < x_ - 1 && py < y_ - 1) if (board[px+1][py+1].is_bomb()) ++counter;
+    if (px < x_ - 1 && py > 0) if (board[px + 1][py - 1].is_bomb()) ++counter;
+    if (px < x_ - 1) if (board[px + 1][py].is_bomb()) ++counter;
+    if (px < x_ - 1 && py < y_ - 1) if (board[px + 1][py + 1].is_bomb()) ++counter;
 
 
     return counter;

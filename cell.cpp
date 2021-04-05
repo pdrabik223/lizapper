@@ -49,11 +49,16 @@ void cell::set_bomb(bool bomb) {
 
 void cell::set_known(bool discover) {
     if (discover) {
-        if (is_known()) return;
-        else value += 32;
+
+        int yas = 0;
+        char idk = '0';
+        idk = value & 32;
+        if (!idk)
+            value += 32;
+
     } else {
-        if (!is_known()) return;
-        else value -= 32;
+        if (is_known())
+            value -= 32;
     }
 }
 
