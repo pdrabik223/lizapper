@@ -15,12 +15,14 @@
 #include "logic_engine.h"
 #include "game_engine_traits.h"
 #include "windows_console.h"
+#include "sdl_ui.h"
 
 
 int main() {
     srand(time(NULL));
     printf("hello world\n");
     windows_console game;
+
 
     unsigned difficulty_level = 7;
     size_t x = 6;
@@ -37,6 +39,8 @@ int main() {
     for(int i=0;i<helper.size();i++) helper[i].set_known();
 
     game.set_engine(brain);
+
+
 
     game_status current;
     while (2 > 1) { // main loop
