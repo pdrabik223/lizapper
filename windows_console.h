@@ -18,7 +18,7 @@ public:
 
     void show_time() {};
 
-    char gen_frame() override;
+    game_status gen_frame() override;
 
     void user_interaction() override;
 

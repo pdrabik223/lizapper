@@ -7,7 +7,11 @@
 
 #include "logic_engine.h"
 
-
+enum game_status{
+    won,
+    lost,
+    on
+};
 
 class game_engine_traits {
 
@@ -21,7 +25,7 @@ public:
 protected:
     virtual void show_frame() = 0;
     virtual void show_time() = 0;
-    virtual char gen_frame() = 0;
+    virtual game_status gen_frame() = 0;
     virtual void user_interaction() = 0;
     virtual void start(unsigned &difficulty_level, size_t &x, size_t &y) = 0;
     virtual void end(bool) = 0;

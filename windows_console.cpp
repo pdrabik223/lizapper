@@ -64,16 +64,16 @@ void windows_console::user_interaction() {
 
 }
 
-char windows_console::gen_frame() {
-    if (player_action == do_nothing) return 0; // nothing happens game is still on
+game_status windows_console::gen_frame() {
+    if (player_action == do_nothing) return on; // nothing happens game is still on
     if (player_action == flag) engine_instation->operator[](cursor_position).switch_flag();
     else if (player_action == pop) {
-        if (engine_instation->operator[](cursor_position).is_flag_on()) return 0;
-        else if (engine_instation->operator[](cursor_position).is_bomb()) return 1; // ha u lose
+        if (engine_instation->operator[](cursor_position).is_flag_on()) return on;
+        else if (engine_instation->operator[](cursor_position).is_bomb()) return lost; // ha u lose
         else engine_instation->iterate(cursor_position);
     }
-    if(engine_instation->is_the_game_won()) return 2; // nice u won
-    return 0;
+    if(engine_instation->is_the_game_won()) return won; // nice u won
+    return on;
 }
 
 void windows_console::start(unsigned &difficulty_level, size_t &x, size_t &y) {

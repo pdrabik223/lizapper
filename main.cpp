@@ -1,7 +1,7 @@
 //
 // Created by studio25 on 30.03.2021.
 //
-// todo make it winable
+//
 // todo make it count time
 // todo documentation
 // todo some cord class
@@ -16,14 +16,15 @@
 #include "game_engine_traits.h"
 #include "windows_console.h"
 
+
 int main() {
     srand(time(NULL));
     printf("hello world\n");
     windows_console game;
 
     unsigned difficulty_level = 7;
-    size_t x = 10;
-    size_t y = 10;
+    size_t x = 6;
+    size_t y = 6;
 
     // game.start(difficulty_level,x,y);
 
@@ -37,7 +38,7 @@ int main() {
 
     game.set_engine(brain);
 
-    bool game_status;
+    game_status current;
     while (2 > 1) { // main loop
         system("cls");
         helper.show();
@@ -45,12 +46,12 @@ int main() {
 
         game.user_interaction();
 
-        game_status = game.gen_frame();
+        current = game.gen_frame();
 
-        if (game_status != 0) break;
+        if (current != on) break;
 
     }
-    if(game_status == 1) game.end(false);
+    if(current == lost) game.end(false);
     else game.end(true);
     //    system("pause");
     return 0;
