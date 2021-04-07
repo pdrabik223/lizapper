@@ -11,22 +11,22 @@
 #include <cstdio>
 #include <iostream>
 #include <ctime>
-#include <thread>
+//#include <thread>
 #include "logic_engine.h"
 #include "game_engine_traits.h"
 #include "windows_console.h"
 #include "sdl_ui.h"
 
 
-int main() {
+int main(int argv, char **args) {
     srand(time(NULL));
     printf("hello world\n");
-    windows_console game;
+    sdl_ui game;
 
 
     unsigned difficulty_level = 7;
-    size_t x = 6;
-    size_t y = 6;
+    size_t x = 20;
+    size_t y = 20;
 
     // game.start(difficulty_level,x,y);
 
@@ -36,12 +36,9 @@ int main() {
 
     brain.fill_with_numbers();
     auto helper(brain);
-    for(int i=0;i<helper.size();i++) helper[i].set_known();
-
+    for (int i = 0; i < helper.size(); i++) helper[i].set_known();
+#if false
     game.set_engine(brain);
-
-
-
     game_status current;
     while (2 > 1) { // main loop
         system("cls");
@@ -58,5 +55,11 @@ int main() {
     if(current == lost) game.end(false);
     else game.end(true);
     //    system("pause");
+#else
+    game.set_engine(brain);
+    game.show_frame();
+    for (int i = 0; i < 10; i++) _sleep(5000);
+    game.end(true);
+#endif
     return 0;
 }
