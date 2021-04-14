@@ -32,11 +32,10 @@ void sdl_ui::show_frame() {
 
             }
         }
-
     }
     SDL_UpdateWindowSurface(window);
 //Wait two seconds
-   // SDL_Delay(5000);
+    // SDL_Delay(5000);
 }
 
 void sdl_ui::end(bool result) {

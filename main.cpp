@@ -21,7 +21,7 @@
 int main(int argv, char **args) {
     srand(time(NULL));
     printf("hello world\n");
-    sdl_ui game;
+    windows_console game;
 
 
     unsigned difficulty_level = 7;
@@ -37,7 +37,7 @@ int main(int argv, char **args) {
     brain.fill_with_numbers();
     auto helper(brain);
     for (int i = 0; i < helper.size(); i++) helper[i].set_known();
-#if false
+#if true
     game.set_engine(brain);
     game_status current;
     while (2 > 1) { // main loop
